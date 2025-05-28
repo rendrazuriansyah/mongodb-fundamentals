@@ -1,0 +1,25 @@
+{
+  "name": "mongoose",
+  "version": "1.0.0",
+  "description": "latihan dasar menggunakan mongoose untuk crud mongodb di node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "mongoose",
+    "mongodb",
+    "nodejs",
+    "crud"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "mongoose": "^8.15.1"
+  }
+}
