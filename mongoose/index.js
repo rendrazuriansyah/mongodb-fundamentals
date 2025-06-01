@@ -111,7 +111,7 @@ const Movie = mongoose.model('Movie', movieSchema);
 //   });
 
 // find by id
-// Movie.findOne({ _id: '6837587cb3c09cca82c75af3' })
+// Movie.findOne({ _id: '683bb10f041aa31c66e2ee63' })
 // .then((result) => {
 //   console.log(result);
 // })
@@ -119,7 +119,62 @@ const Movie = mongoose.model('Movie', movieSchema);
 //   console.error(error);
 // });
 // is same to
-Movie.findById('6837587cb3c09cca82c75af3')
+// Movie.findById('683bb10f041aa31c66e2ee63')
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
+// Movie.findByIdAndUpdate(
+//   '683bb10f041aa31c66e2ee63',
+//   {
+//     genre: 'genreTest',
+//     year: 2022,
+//   },
+//   { new: true }
+// )
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
+// Movie.updateOne({ rating: 9.9 }, { rating: 9.8 })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
+// Movie.deleteOne({ rating: 9.8 })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
+// Movie.find({ rating: 9.8 })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
+Movie.findByIdAndDelete('683bb10f041aa31c66e2ee62')
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+Movie.find()
   .then((result) => {
     console.log(result);
   })
