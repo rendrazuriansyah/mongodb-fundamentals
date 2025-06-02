@@ -58,11 +58,28 @@ const productSchema = mongoose.Schema({
   },
 });
 
+// methods cocoknya untuk per-object
 productSchema.methods.outStock = function () {
+  // this dsini ngarahnya 1 dokumenn
   this.stock = 0;
   this.availability.online = false;
   this.availability.offline = false;
   return this.save();
+};
+
+// statics cocoknya uuntuk per-collection
+productSchema.statics.closeStore = function () {
+  // this dsini ngarahnya ke model/collection
+  return this.updateMany(
+    {},
+    {
+      stock: 0,
+      availability: {
+        online: false,
+        offline: false,
+      },
+    }
+  );
 };
 
 const Product = mongoose.model('Product', productSchema);
@@ -73,7 +90,15 @@ const changeStock = async (id) => {
   console.log('Stock updated');
 };
 
-changeStock('683d0e588670ce40ea040a7a');
+// changeStock('683d0e588670ce40ea040a7a');
+
+Product.closeStore()
+  .then(() => {
+    console.log('Store closed');
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
 // const tshirt = new Product({
 //   name: 'Kemeja Flanel',
