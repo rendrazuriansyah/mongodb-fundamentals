@@ -14,9 +14,46 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  brand: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
+    min: 0,
+  },
+  color: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: [String],
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+    maxLength: 150,
+  },
+  condition: {
+    type: String,
+    required: true,
+  },
+  stock: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  availability: {
+    online: {
+      type: Boolean,
+      required: true,
+    },
+    offline: {
+      type: Boolean,
+      required: true,
+    },
   },
 });
 
