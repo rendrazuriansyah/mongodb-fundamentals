@@ -26,6 +26,16 @@ personSchema
     this.last_name = parts[parts.length - 1];
   });
 
+personSchema.pre('save', function () {
+  // this.first_name = 'Icikiwir'; // ini nge override value property
+  // this.cratedAt = new Date(); // bikin key-value baru
+  return console.log('pre save');
+});
+
+personSchema.post('save', function () {
+  return console.log('post save');
+});
+
 // mengaktifkan virtual property ke db
 // personSchema.set('toJSON', { virtuals: true });
 // personSchema.set('toObject', { virtuals: true });
@@ -45,3 +55,12 @@ console.log(person); // virtual property gabakalan muncul disini
 console.log(person.first_name);
 console.log(person.last_name);
 console.log(person.full_name); // hrs diakses melalui virtual get property
+
+person
+  .save()
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
