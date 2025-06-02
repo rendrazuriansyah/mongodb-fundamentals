@@ -44,7 +44,7 @@ const productSchema = mongoose.Schema({
   stock: {
     type: Number,
     required: true,
-    min: 0,
+    min: [0, 'Stock cannot be negative'],
   },
   availability: {
     online: {
