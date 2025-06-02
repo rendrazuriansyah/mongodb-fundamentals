@@ -38,7 +38,8 @@ const productSchema = mongoose.Schema({
   },
   condition: {
     type: String,
-    required: true,
+    enum: ['baru', 'bekas'],
+    default: 'baru',
   },
   stock: {
     type: Number,
@@ -59,18 +60,40 @@ const productSchema = mongoose.Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-const tshirt = new Product({
-  name: 'T-Shirt cba',
-  price: 123456789,
-  rating: 4.5,
-});
+// const tshirt = new Product({
+//   name: 'Kemeja Flanel',
+//   brand: 'Hollister',
+//   price: 750000,
+//   color: 'biru muda',
+//   size: ['S', 'M', 'L'],
+//   description:
+//     'Kemeja flanel dengan warna yang cerah, terbuat dari bahan flanel yang nyaman dan berkualitas tinggi.',
+//   condition: 'baru',
+//   stock: 25,
+//   availability: {
+//     online: true,
+//     offline: true,
+//   },
+// });
 
-tshirt
-  .save()
-  .then((result) => {
-    console.log('Data saved successfully');
-    console.log(result);
-  })
-  .catch((error) => {
-    console.error('Error saving data:', error);
-  });
+// tshirt
+//   .save()
+//   .then((result) => {
+//     console.log('Data saved successfully');
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error('Error saving data:', error);
+//   });
+
+const update = Product.findOneAndUpdate(
+  { name: 'Kemeja Flanel' },
+  {
+    price: -123456789,
+    stock: -25,
+  },
+  {
+    new: true,
+    runValidators: true, // wajib klo ada validasi
+  }
+);
