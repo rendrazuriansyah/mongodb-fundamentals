@@ -58,7 +58,22 @@ const productSchema = mongoose.Schema({
   },
 });
 
+productSchema.methods.outStock = function () {
+  this.stock = 0;
+  this.availability.online = false;
+  this.availability.offline = false;
+  return this.save();
+};
+
 const Product = mongoose.model('Product', productSchema);
+
+const changeStock = async (id) => {
+  const foundProduct = await Product.findById(id);
+  await foundProduct.outStock();
+  console.log('Stock updated');
+};
+
+changeStock('683d0e588670ce40ea040a7a');
 
 // const tshirt = new Product({
 //   name: 'Kemeja Flanel',
@@ -86,27 +101,27 @@ const Product = mongoose.model('Product', productSchema);
 //     console.error('Error saving data:', error);
 //   });
 
-Product.findOneAndUpdate(
-  { name: 'Kemeja Flanel' },
-  {
-    price: -123456789,
-    stock: -25,
-  },
-  {
-    new: true,
-    runValidators: true, // wajib klo ada validasi
-  }
-)
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((error) => {
-    // Ambil error message ringkas
-    if (error.name === 'ValidationError') {
-      for (let field in error.errors) {
-        console.log(`${field}: ${error.errors[field].message}`);
-      }
-    } else {
-      console.log(error.message);
-    }
-  });
+// Product.findOneAndUpdate(
+//   { name: 'Kemeja Flanel' },
+//   {
+//     price: -123456789,
+//     stock: -25,
+//   },
+//   {
+//     new: true,
+//     runValidators: true, // wajib klo ada validasi
+//   }
+// )
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     // Ambil error message ringkas
+//     if (error.name === 'ValidationError') {
+//       for (let field in error.errors) {
+//         console.log(`${field}: ${error.errors[field].message}`);
+//       }
+//     } else {
+//       console.log(error.message);
+//     }
+//   });
