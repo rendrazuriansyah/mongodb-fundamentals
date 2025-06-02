@@ -86,7 +86,7 @@ const Product = mongoose.model('Product', productSchema);
 //     console.error('Error saving data:', error);
 //   });
 
-const update = Product.findOneAndUpdate(
+Product.findOneAndUpdate(
   { name: 'Kemeja Flanel' },
   {
     price: -123456789,
@@ -96,4 +96,17 @@ const update = Product.findOneAndUpdate(
     new: true,
     runValidators: true, // wajib klo ada validasi
   }
-);
+)
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    // Ambil error message ringkas
+    if (error.name === 'ValidationError') {
+      for (let field in error.errors) {
+        console.log(`${field}: ${error.errors[field].message}`);
+      }
+    } else {
+      console.log(error.message);
+    }
+  });
