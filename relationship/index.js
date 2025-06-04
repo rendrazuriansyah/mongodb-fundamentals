@@ -24,20 +24,36 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // ONE TO FEW
-const makeUser = async () => {
-  const user = new User({
-    name: 'Rendra',
-  });
+// const makeUser = async () => {
+//   const user = new User({
+//     name: 'Rendra',
+//   });
 
-  // embed doc (inline)
+//   // embed doc (inline)
+//   user.addresses.push({
+//     street: '123 Main St',
+//     city: 'Anytown',
+//     country: 'ID',
+//   });
+
+//   const res = await user.save();
+
+//   console.log(res);
+// };
+// makeUser();
+
+// insert data ke property yg punya one to few
+const addAddress = async (id) => {
+  const user = await User.findById(id);
+
   user.addresses.push({
-    street: '123 Main St',
-    city: 'Anytown',
-    country: 'ID',
+    street: '999 Last St',
+    city: 'Sometown',
+    country: 'WKND',
   });
 
   const res = await user.save();
 
   console.log(res);
 };
-makeUser();
+addAddress('68404286bbccf0da35558d73');
