@@ -43,17 +43,17 @@ const User = mongoose.model('User', userSchema);
 // makeUser();
 
 // insert data ke property yg punya one to few
-const addAddress = async (id) => {
-  const user = await User.findById(id);
+// const addAddress = async (id) => {
+//   const user = await User.findById(id);
 
-  user.addresses.push({
-    street: '999 Last St',
-    city: 'Sometown',
-    country: 'WKND',
-  });
+//   user.addresses.push({
+//     street: '999 Last St',
+//     city: 'Sometown',
+//     country: 'WKND',
+//   });
 
-  const res = await user.save();
+//   const res = await user.save();
 
-  console.log(res);
-};
-addAddress('68404286bbccf0da35558d73');
+//   console.log(res);
+// };
+// addAddress('68404286bbccf0da35558d73');
