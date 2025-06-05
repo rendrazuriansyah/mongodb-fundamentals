@@ -1,0 +1,37 @@
+Metode      Contoh Penggunaan	Kelebihan	                    Kekurangan
+----------------------------------------------------------------------------------------------
+Embedding	Alamat user			Query cepat, data lengkap		Tidak bisa akses terpisah
+----------------------------------------------------------------------------------------------
+Array Refs	Produk & sparepart	Fleksibel, bisa many-to-many	Butuh join aplikasi
+----------------------------------------------------------------------------------------------
+Parent Ref	Server & log		Handle data sangat besar        Butuh join aplikasi
+----------------------------------------------------------------------------------------------
+
+Intinya, pilih model yang paling cocok dengan kebutuhan aplikasi kamu, terutama berdasarkan:
+1. Seberapa banyak data di sisi "N"
+2. Seberapa sering data di sisi "N" perlu diakses terpisah
+3. Seberapa sering data dibaca vs diupdate
+
+Embedding (One to Few)
+Contoh: Alamat seseorang
+
+Referensi Array (One to Many)
+Contoh: Produk dan sparepart-nya
+
+Parent Reference (One to Squillion)
+Contoh: Server dan log message
+
+Two-way Referencing
+Contoh: Person <-> Task
+
+Denormalisasi (duplikasi beberapa data untuk mempercepat query)
+-> Data sering dibaca tapi jarang diupdate
+-> Performa query lebih penting dari konsistensi data
+Contoh: Denormalisasi nama part ke Product
+{
+  name: 'left-handed smoke shifter',
+  parts: [
+    { id: ObjectID('AAAA'), name: '#4 grommet' }, // Nama diduplikasi
+    { id: ObjectID('F17C'), name: 'fan blade assembly' }
+  ]
+}
